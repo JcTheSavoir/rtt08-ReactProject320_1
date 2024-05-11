@@ -1,0 +1,20 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.navbarContainer {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(30, 49, 200);
+    color: white;
+    padding: 0.5em;
+    font-size: 2em;
+  }
+  .navbarContainer a {
+    color: white;
+    text-decoration: none;
+  }
+  .navbarTitle{
+    color: rgb(255, 0, 162);
+  }
