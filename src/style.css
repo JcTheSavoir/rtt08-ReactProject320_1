@@ -63,3 +63,17 @@ body{
 .infoDeeper{
   text-decoration: none;
 }
+
+/* Under Construction section */
+.underConstruction{
+  /* width: 100%; */
+  height: 100vh;
+  background-color: yellow;
+}
+.underConstructionImage{
+  width: 100%;
+  height: 100%;
+  background-image: url(../public/underConstruction.PNG);
+  background-position: top;
+  background-color: blue;
+}
