@@ -1,20 +1,65 @@
 body{
     margin: 0;
     padding: 0;
+    background-color: rgb(200, 180, 150)
+    
 }
 
+/* -----------------------------{NavBar}---------------------- */
 .navbarContainer {
     display: flex;
     justify-content: space-between;
-    background-color: rgb(30, 49, 200);
-    color: white;
+    background-color: rgb(90, 77, 65);
+    color: rgb(245, 245, 220);
     padding: 0.5em;
     font-size: 2em;
-  }
-  .navbarContainer a {
-    color: white;
-    text-decoration: none;
-  }
-  .navbarTitle{
-    color: rgb(255, 0, 162);
-  }
+}
+.navbarContainer a {
+  color: rgb(245, 245, 220);
+  text-decoration: none;
+}
+.navbarTitle{
+  color: rgb(255, 0, 162);
+}
+
+/* -----------------------{api info}----------------------- */
+.apiContainer{
+}
+.topInfo{
+  text-align: center;
+}
+.allInfoContainer{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+.eachInfoContainer{
+  padding: 1em;
+  margin: 1em 2em;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background-image: url(../public/scroll-png-4490.png);
+  height: 10em;
+  width: 10em;
+  background-size: cover;
+  background-position: center;
+}
+.infoOne{
+  color: rgb(90, 77, 65);
+}
+.infoOneTitle{
+  color: rgb(47, 79, 79);
+  font-weight: bold;
+}
+.infoTwo{
+  color: rgb(90, 77, 65);
+}
+.infoTwoTitle{
+  color: rgb(47, 79, 79);
+  font-weight: bold;
+}
+.infoDeeper{
+  text-decoration: none;
+}

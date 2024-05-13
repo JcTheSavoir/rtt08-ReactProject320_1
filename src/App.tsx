@@ -20,7 +20,7 @@ function App() {
         <Route path='/options' element={<Options/>}/>
         <Route path='/monsters/search' element={<SearchMonster/>}/>
         <Route path='/:symbol/all' element={<AllSpells/>}/>
-        <Route path='/:symbol' element={<EachSpell/>}/>
+        <Route path='/spells/:symbol' element={<EachSpell/>}/>
       </Routes>
     </div>
   )

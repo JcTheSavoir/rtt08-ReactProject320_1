@@ -45,18 +45,21 @@ const AllSpells = () => {
   // loaded function for loading elements once data has been fetched
   const loaded = () => {
     return (
-      <div className="infoAPIContainer">
-        <div className="topInfo">Number Of Spells: {picked?.count}</div>
-        {picked?.results.map((spell) => (
-          <div className="eachInfoContainer">
-            <div className="infoOne">{spell.name}</div>
-            <div className="infoTwo">{spell.level}</div>
-            <div className="infoThree">{spell.url}</div>
-            <Link to={`${spell.url.slice(4)}`}>
-              <div className="infoDeeper">Click For More Information</div>
-            </Link>
-          </div>
-        ))}
+      <div className="apiContainer">
+        <h2 className="topInfo">Number Of Spells: {picked?.count}</h2>
+        <div className="allInfoContainer">
+          {picked?.results.map((spell) => (
+            <div className="eachInfoContainer">
+              <div className="infoOneTitle">Name:</div>
+              <div className="infoOne">{spell.name}</div>
+              <div className="infoTwoTitle">Level:</div>
+              <div className="infoTwo">{spell.level}</div>
+              <Link className="infoDeeper" to={`${spell.url.slice(4)}`}>
+                <div>Spell Details</div>
+              </Link>
+            </div>
+          ))}
+        </div>  
       </div>
     )
   }
