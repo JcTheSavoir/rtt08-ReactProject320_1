@@ -49,7 +49,7 @@ const AllSpells = () => {
         <h2 className="topInfo">Number Of Spells: {picked?.count}</h2>
         <div className="allInfoContainer">
           {picked?.results.map((spell) => (
-            <div className="eachInfoContainer">
+            <div className="eachInfoMapContainer">
               <div className="infoOneTitle">Name:</div>
               <div className="infoOne">{spell.name}</div>
               <div className="infoTwoTitle">Level:</div>
