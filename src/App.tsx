@@ -4,7 +4,7 @@ import './style.css'
 import { Route, Routes } from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import Options from './pages/Options';
-import SearchMonster from './pages/SearchMonster'
+// import SearchMonster from './pages/SearchMonster'
 import AllSpells from './pages/AllSpells';
 import NavBar from './components/NavBar';
 import EachSpell from './pages/EachSpell';
@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Homepage/>}/>
         <Route path='/options' element={<Options/>}/>
-        <Route path='/monsters/search' element={<SearchMonster/>}/>
+        {/* <Route path='/monsters/search' element={<SearchMonster/>}/> */}
         <Route path='/:symbol/all' element={<AllSpells/>}/>
         <Route path='/spells/:symbol' element={<EachSpell/>}/>
       </Routes>

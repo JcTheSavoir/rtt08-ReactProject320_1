@@ -4,38 +4,36 @@
 body{
     margin: 0;
     padding: 0;
-    background-color: rgb(200, 180, 150)
-    
+    background-color: rgb(200, 180, 150)    
 }
 
 .App{
-  min-height: 100vh;
   height: 100vh;
+  min-height: 100vh;
 }
 /* -----------------------------{NavBar}---------------------- */
 .navbarContainer {
-    /* height: 4%; */
+    padding: 0.5em;
+    font-size: 2em;
     display: flex;
     justify-content: space-between;
     background-color: rgb(90, 77, 65);
     color: rgb(245, 245, 220);
-    padding: 0.5em;
-    font-size: 2em;
 }
 .navbarContainer a {
+  height: 100%;
   color: rgb(245, 245, 220);
   text-decoration: none;
-  height: 100%;
 }
 .navbarTitle{
-  color: rgb(255, 0, 162);
   height: 100%;
+  color: rgb(255, 99, 71);
+  text-align: center;
 }
 
-/* -----------------------{api info }----------------------- */
+/* -----------------------{api info all}----------------------- */
 .topInfo{
   text-align: center;
-  /* height: 3%; */
 }
 .allInfoContainer{
   height: 96%;
@@ -44,6 +42,8 @@ body{
   justify-content: center;
 }
 .eachInfoMapContainer{
+  height: 10em;
+  width: 10em;
   padding: 1em;
   margin: 1em 2em;
   display: flex;
@@ -51,8 +51,6 @@ body{
   align-items: center;
   justify-content: space-evenly;
   background-image: url(/horizontal_scroll.png);
-  height: 10em;
-  width: 10em;
   background-size: cover;
   background-position: center;
 }
@@ -74,12 +72,68 @@ body{
   text-decoration: none;
 }
 
+/* ---------------------{Each Info API}------------------  */
+.apiContainer{
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+} 
+
+.eachInfoContainer{
+  height: fit-content;
+  width: 95%;
+  padding: 2em 4em;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-image: url(/upscaled_scroll.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  /* background-position: center; */
+}
+.topInfoContainer{
+  border-bottom: solid black;
+  height: fit-content;
+  width: 84cqi;
+  padding: 12cqb 0 0 0;
+  margin: 0 0 0.5em 0;
+  display: flex;
+  flex-flow: column;
+}
+.bottomInfoContainer{
+  height: fit-content;
+  width: 84cqi;
+  margin: 1em 0 10em 0;
+  display: flex;
+  flex-flow: column;
+}
+.topInfoTitle{
+  font-size: 3cqmin;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: rgb(240, 128, 128);
+  font-weight: bolder;
+}
+.topInfoEach{
+  font-size: 2.5cqmin;
+}
+.bottomInfoEach{
+  font-size: 1.5cqmin;
+}
+
 
 /* Under Construction section */
-.underConstruction{
-  /* width: 100%; */
+.underConstructionContainer{
   height: 100vh;
   background-color: yellow;
+}
+.underConstructionTitle{
+  margin: 0;
+  padding: 1em;
+  text-align: center;
 }
 .underConstructionImage{
   width: 100%;
@@ -89,52 +143,52 @@ body{
   background-color: blue;
 }
 
-/* ---------------------{Each Info API}------------------  */
-.apiContainer{
-  height: 95%;
+/* --------------------------{Options}----------------------- */
+.optionsPageContainer{
+  margin: 5em;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
   flex-flow: column;
+  align-items: center;
+}
+.optionsTitle{
+  color: rgb(0, 255, 255);
+}
+.optionsDescr{
+  font-size: large;
+}
+.optionsList{
+  list-style-type: none;
+  width: 100vw;
+  margin: 3em 0 0 0;
+  padding: 0;
 }
 
-.eachInfoContainer{
-  container-type: size;
-  padding: 2em 1em;
-  margin: 1em 2em;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: start;
-  background-image: url(/upscaled_scroll.png);
-  background-size: 100% 100%;
+.optionsList *{
+  text-decoration: none;
+}
+.optionLink1{
+  color: rgb(255, 215, 0);
+  text-shadow: 3px 3px 6px rgba(255, 215, 0, 0.8);
+}
+.optionLink2{
+  color: rgb(255, 215, 0);
+  text-shadow: 3px 3px 6px rgba(255, 215, 0, 0.8);
+}
+.optionListitem1{
+  padding: 1em 0;
+  font-size: xx-large;
+  text-align: center;
+  background-image: url(/bluishPoison.gif);
+  background-size: cover;
   background-repeat: no-repeat;
-  /* background-position: center; */
-  height: 98%;
-  width: 95%;
+  background-position: center;
 }
-.topInfoContainer{
-  padding: 15cqb 0 0 0;
-  /* margin: 0 10cqb; */
-  display: flex;
-  flex-flow: column;
-  /* justify-content: space-around; */
-  height: 40cqmin;
-  width: 86cqi;
-  /* min-width:  */
-}
-.bottomInfoContainer{
-  display: flex;
-  flex-flow: column;
-  height: 40cqmin;
-  width: 70%;
-}
-.topInfoTitle{
-  /* height: 33%; */
-  font-size: 5cqmax;
-  /* font-size: max(5cqi, 5cqb); */
-}
-.topInfoEach{
-  font-size: 4cqmin;
+.optionListItem2{
+  padding: 1em 0;
+  font-size: xx-large;
+  text-align: center;
+  background-image: url(/greenPoison.gif);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
