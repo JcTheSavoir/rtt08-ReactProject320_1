@@ -1,19 +1,7 @@
 import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom"
 import { Link } from "react-router-dom";
-
-
-//creating interfaces for the api data
-interface IAllSpells {
-    index: string;
-    name: string;
-    level: number;
-    url: string;
-}
-interface IPicked {
-  count: number;
-  results: IAllSpells[];
-}
+import { IAllSpells, IPicked } from "../interfaces/allSpellsInter";
 
 
 const AllSpells = () => {
