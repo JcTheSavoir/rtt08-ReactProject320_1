@@ -37,7 +37,9 @@ const AllSpells = () => {
       <div className="apiContainer">
         <h2 className="topInfo">Number Of Spells: {spells?.count}</h2>
         <div className="allInfoContainer">
-          {spells?.results.map((spell) => (
+          {spells?.results.map((spell) => {
+            return(
+          
             <div className="eachInfoMapContainer">
               <div className="infoOneTitle">Name:</div>
               <div className="infoOne">{spell.name}</div>
@@ -47,16 +49,16 @@ const AllSpells = () => {
                 <div>Spell Details</div>
               </Link>
             </div>
-          ))}
+          )})}
         </div>  
       </div>
     )
   }
   
   // Function for when data doesn't exist.
-const loading = () => {
-  return <h1>Loading...</h1>;
-};
+  const loading = () => {
+    return <h1>Loading...</h1>;
+  };
 
   return spells ? loaded() : loading();
 }

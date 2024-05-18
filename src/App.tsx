@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Homepage/>}/>
         <Route path='/options' element={<Options/>}/>
-        <Route path='/monsters/search' element={<SearchMonster/>}/>
+        <Route path='/:symbol/search' element={<SearchMonster/>}/>
         <Route path='/:symbol/all' element={<AllSpells/>}/>
         <Route path='/spells/:symbol' element={<EachSpell/>}/>
       </Routes>

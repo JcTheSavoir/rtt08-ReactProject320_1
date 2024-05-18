@@ -6,15 +6,13 @@ const Options = () => {
       { name: "All", symbol: "Spells" },
   ];
   
-
   return (
     <div className="optionsPageContainer">
         <h2 className="optionsTitle">Pick your Poison</h2>
         <div className="optionsDescr">Below you will find a list of current options implemented in the site.</div>
         <ul className="optionsList">
           {userOptions.map((picked, i) => {
-            const { name, symbol } = picked;
-          
+            const { name, symbol } = picked;          
             return (
                 <li className="optionListitem1">
                     <Link to={`/${symbol.toLowerCase()}/${name.toLowerCase()}`} key={i}>

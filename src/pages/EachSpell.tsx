@@ -5,7 +5,9 @@ import { IEachSpell } from "../interfaces/eachSpellInter";
 const EachSpell = () => {
   const params = useParams();
   const symbol = params.symbol
+  console.log(symbol)
   const url = `https://www.dnd5eapi.co/api/spells/${symbol?.toLowerCase()}`
+  console.log(url)
 
   const [spell, setSpell] = useState<IEachSpell | null>(null);
 
