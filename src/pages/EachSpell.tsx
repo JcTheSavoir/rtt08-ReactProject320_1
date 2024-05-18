@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom"
 
-interface IPicked {
+interface IEachSpell {
   index: string;
   name: string;
   desc: string[];
@@ -48,13 +48,13 @@ const EachSpell = () => {
   const symbol = params.symbol
   const url = `https://www.dnd5eapi.co/api/spells/${symbol?.toLowerCase()}`
 
-  const [picked, setPicked] = useState<IPicked | null>(null);
+  const [spell, setSpell] = useState<IEachSpell | null>(null);
 
   const getSpell = async () => {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      setPicked(data) 
+      setSpell(data) 
       console.log(data)
     } catch(e) {
       console.error(e)
@@ -65,33 +65,33 @@ const EachSpell = () => {
   }, [])
 
   const loaded = () => {
-    console.log(picked)
+    console.log(spell)
     return (
       <div className="apiContainer">
             <div className="eachInfoContainer">
               <div className="topInfoContainer">
-                <div className="topInfoTitle">{picked?.name}</div>
-                <div className="topInfoEach"><em>Level {picked?.level} {picked?.school.name}</em></div>
-                <div className="topInfoEach"><strong>Casting Time:</strong> {picked?.casting_time}</div>
-                <div className="topInfoEach"><strong>Range:</strong> {picked?.range}</div>
-                <div className="topInfoEach"><strong>Components:</strong> {picked?.components.join(', ')} 
-                {picked?.material && `(${picked?.material})`}</div>
-                <div className="topInfoEach"><strong>Duration:</strong> {picked?.duration}</div>
+                <div className="topInfoTitle">{spell?.name}</div>
+                <div className="topInfoEach"><em>Level {spell?.level} {spell?.school.name}</em></div>
+                <div className="topInfoEach"><strong>Casting Time:</strong> {spell?.casting_time}</div>
+                <div className="topInfoEach"><strong>Range:</strong> {spell?.range}</div>
+                <div className="topInfoEach"><strong>Components:</strong> {spell?.components.join(', ')} 
+                {spell?.material && `(${spell?.material})`}</div>
+                <div className="topInfoEach"><strong>Duration:</strong> {spell?.duration}</div>
               </div>
               <div className="bottomInfoContainer">
-                <div className="bottomInfoEach">{picked?.desc.join(' ')}</div>
+                <div className="bottomInfoEach">{spell?.desc.join(' ')}</div>
                 <br></br>
-                {picked?.higher_level && picked?.higher_level.length > 0 && (
+                {spell?.higher_level && spell?.higher_level.length > 0 && (
                   <>
-                    <div className="bottomInfoEach"><strong>At Higher Levels: </strong>{picked?.higher_level.join(' ')}</div>
+                    <div className="bottomInfoEach"><strong>At Higher Levels: </strong>{spell?.higher_level.join(' ')}</div>
                     <br></br>
                   </>
                 )}
-                <span className="bottomInfoEach"><strong>Class</strong>: {picked?.classes && picked?.classes.length > 0 ? picked?.classes.map((theClass) =>
+                <span className="bottomInfoEach"><strong>Class</strong>: {spell?.classes && spell?.classes.length > 0 ? spell?.classes.map((theClass) =>
                   <span className="bottomInfoEach">- <em>{theClass.name}</em> </span>
                 ) : "N/A"}
                 </span>
-                <span className="bottomInfoEach"><strong>Subclass</strong>:  {picked?.subclasses && picked?.subclasses.length > 0 ? picked?.subclasses?.map((theSubClass) =>
+                <span className="bottomInfoEach"><strong>Subclass</strong>:  {spell?.subclasses && spell?.subclasses.length > 0 ? spell?.subclasses?.map((theSubClass) =>
                   <span className="bottomInfoEach">- <em>{theSubClass.name}</em> </span>
                 ) : 'N/A'}
                 </span>
@@ -102,8 +102,8 @@ const EachSpell = () => {
   }
 const loading = () => {
   return <h1>Loading...</h1>;
-};
+ };
 
-  return picked ? loaded() : loading();
+  return spell ? loaded() : loading();
 }
 export default EachSpell;

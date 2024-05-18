@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 
 //creating interfaces for the api data
-interface ISpell {
+interface IAllSpells {
     index: string;
     name: string;
     level: number;
@@ -12,7 +12,7 @@ interface ISpell {
 }
 interface IPicked {
   count: number;
-  results: ISpell[];
+  results: IAllSpells[];
 }
 
 
@@ -24,13 +24,14 @@ const AllSpells = () => {
   const url = `https://www.dnd5eapi.co/api/${symbol?.toLowerCase()}`
 
   // State to hold the option data
-  const [picked, setPicked] = useState<IPicked | null>(null);
+  const [spells, setSpells] = useState<IPicked | null>(null);
 
   const getSpells = async () => {
     try {
+      console.log("Getting spells")
       const response = await fetch(url);
       const data = await response.json();
-      setPicked(data) 
+      setSpells(data) 
       console.log(data)
     } catch(e) {
       console.error(e)
@@ -46,9 +47,9 @@ const AllSpells = () => {
   const loaded = () => {
     return (
       <div className="apiContainer">
-        <h2 className="topInfo">Number Of Spells: {picked?.count}</h2>
+        <h2 className="topInfo">Number Of Spells: {spells?.count}</h2>
         <div className="allInfoContainer">
-          {picked?.results.map((spell) => (
+          {spells?.results.map((spell) => (
             <div className="eachInfoMapContainer">
               <div className="infoOneTitle">Name:</div>
               <div className="infoOne">{spell.name}</div>
@@ -69,6 +70,6 @@ const loading = () => {
   return <h1>Loading...</h1>;
 };
 
-  return picked ? loaded() : loading();
+  return spells ? loaded() : loading();
 }
 export default AllSpells;
