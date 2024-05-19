@@ -3,7 +3,7 @@ import { Details } from "../interfaces/searchMonstersInter";
 const FormOutput = ({ theMon }: { theMon: Details | null }) => {
 
   //For the non-array objects inside of the monsters details {namely Speed and Skills}
-  const getObjDetails = (obj: { [key: string]: number | boolean | undefined } | undefined): string => {
+  const getObjDetails = (obj: { [key: string]: number | boolean | undefined } | undefined, type: 'speed' | 'skills'): string => {
     if (!obj) { // Check if the object is undefined and handle it
       return 'N/A';
     }
@@ -16,15 +16,18 @@ const FormOutput = ({ theMon }: { theMon: Details | null }) => {
         objDetails.push('Hover');
       } else {
         // all valid entries are then added
-        objDetails.push(`${key.charAt(0).toUpperCase() + key.slice(1)}: ${value} ft.`);
+        if (type === "skills") {
+          objDetails.push(`${key.charAt(0).toUpperCase() + key.slice(1)} +${value}`);
+        } else if (type === 'speed') {
+          objDetails.push(`${key.charAt(0).toUpperCase() + key.slice(1)} ${value} ft.`);
+        }
       }
     }
-
     return objDetails.length > 0 ? objDetails.join(', ') : 'N/A'; //N/A is incase the object is empty or has no values
   };
 
-  const speedDetails = getObjDetails(theMon?.speed);
-  const skillDetails = getObjDetails(theMon?.skills);
+  const speedDetails = getObjDetails(theMon?.speed, "speed");
+  const skillDetails = getObjDetails(theMon?.skills, "skills");
 
   console.log(theMon)
   return (
@@ -43,7 +46,7 @@ const FormOutput = ({ theMon }: { theMon: Details | null }) => {
       </div>
       <div className="formInfoFourCon">
         <div className="infoForm4"><strong>Saving Throws</strong> </div>
-        <div className="infoForm4"><strong>Skills</strong></div>
+        <div className="infoForm4"><strong>Skills</strong> {skillDetails}</div>
         <div className="infoForm4"><strong>Damage Immunities</strong></div>
         <div className="infoForm4"><strong>Condition Immunities</strong></div>
         <div className="infoForm4"><strong>Senses</strong></div>
@@ -53,7 +56,7 @@ const FormOutput = ({ theMon }: { theMon: Details | null }) => {
       <div className="formInfoFourCon">
 
       </div>
-      {theMon?.special_abilities?.map((special, i) => {
+      {theMon?.special_abilities?.map((special) => {
         return(
           <div className="formInfoMap1Con">
             <div className="infoFormMap1"><strong><em>{special.name}.</em></strong> {special.desc}</div>
