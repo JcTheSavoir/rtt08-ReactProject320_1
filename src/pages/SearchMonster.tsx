@@ -10,6 +10,16 @@ const SearchMonster = () => {
   const url = `https://api.open5e.com/v1/${symbol?.toLowerCase()}/?document__slug=wotc-srd&format=json&limit=350`
 
   const [monsters, setMonsters] = useState<IMonsters | null>(null);
+  const [searchInput, setSearchInput] = useState("");
+
+  const getSearch = () => {
+    
+  }
+
+  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    console.log("search button clicked")
+    event.preventDefault()
+  }
 
   const getMonsters = async () => {
     try {
@@ -26,13 +36,32 @@ const SearchMonster = () => {
   useEffect(() => {
     getMonsters();
   }, [])
+  const namesArray = []
 
+  const inputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(event.target.value);
+  };
 
   const loaded = () => {
-    console.log("hello")
+    const filterMonsters = monsters?.results.filter(
+      monster => monster.name.toLowerCase().includes(searchInput.toLowerCase())
+    ).slice(0, 10) || [];
+    console.log(filterMonsters)
+
     return (
       <div className="apiContainer">
-        <h1>{monsters?.count}</h1>
+        <form onSubmit={submitForm} action="">
+          <label htmlFor="searchName">Enter a Monsters Name: </label>
+          <input list="monsterNames" name="searchName" value={searchInput} onChange={inputChange}/>
+          <datalist id="monsterNames">
+            {filterMonsters?.map((monster) => (
+              <option key={monster.slug} value={monster.name}></option>
+            ))}
+          </datalist>
+          <br/>
+          <button onClick={getSearch}>Submit</button>
+        </form>
+        <h1></h1>
       </div>
     )
   }
