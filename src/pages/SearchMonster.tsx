@@ -81,7 +81,7 @@ const SearchMonster = () => {
           <button onClick={getSearch} className="apiFormButton">Submit</button>
         </form>
           {searchedMonster ? (
-              <FormOutput theSearchedMonster={searchedMonster} />
+              <FormOutput theMon={searchedMonster} />
             ) : (
               <h2>No monster found by that name, try searching again.  You can try "Zombie" as a known working option</h2>
             )

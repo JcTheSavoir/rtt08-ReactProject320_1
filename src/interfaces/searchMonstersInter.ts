@@ -5,9 +5,9 @@ interface Speed {
     fly?: number;
     hover?: boolean;
     swim?: number;
+    [key: string]: number | boolean | undefined;
 }
 interface Skills {
-    any?: number;
     arcana?: number;
     acrobatics?: number;
     athletics?: number;
