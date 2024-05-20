@@ -1,6 +1,30 @@
 import { Details } from "../interfaces/searchMonstersInter";
 
 const FormOutput = ({ theMon }: { theMon: Details | null }) => {
+  //For calculating the ability score modifiers
+  const calculateModifier = (score: number): number => {
+    return Math.floor((score - 10) / 2);
+  };
+
+  // Adding incase "theMon" prop ends up being null
+  if (!theMon) {
+    return <h1>Data Error: Please try Again later</h1>
+  } 
+  
+  // Array defining the labels for the ability score names
+  const abilityNames = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
+  // Array for defining the ability scores themselves
+  const abilityScores = [
+    theMon.strength,
+    theMon.dexterity,
+    theMon.constitution,
+    theMon.intelligence,
+    theMon.wisdom,
+    theMon.charisma
+  ];
+  // variable for each ability score modifier
+  const abilityModifiers = abilityScores.map(score => calculateModifier(score));
+
 
   //For the non-array objects inside of the monsters details {namely Speed and Skills}
   const getObjDetails = (obj: { [key: string]: number | boolean | undefined | null } | undefined, type: 'speed' | 'skills' | 'savingThrows'): string => {
@@ -54,14 +78,24 @@ const FormOutput = ({ theMon }: { theMon: Details | null }) => {
         <div className="infoForm1Title">{theMon?.name}</div>
         <div className="infoForm1Details">{theMon?.size} {theMon?.type}, {theMon?.alignment}</div>
       </div>
+
       <div className="formInfoTwoCon">
         <div className="infoForm2"><strong>Armor Class</strong> {theMon?.armor_class} ({theMon?.armor_desc})</div>
         <div className="infoForm2"><strong>Hit Points</strong> {theMon?.hit_points} ({theMon?.hit_dice})</div>
         <div className="infoForm2"><strong>Speed</strong> {speedDetails}</div>
       </div>
+
       <div className="formInfoThreeCon">
-        <div className="infoForm3"></div>
+        {abilityNames.map((name, index) => (
+          <div key={index} className="infoForm3Item">
+            <div className="infoForm3Name">{name}</div>
+            <div className="infoForm3Score">
+              {abilityScores[index]} ({abilityModifiers[index] >= 0 ? '+' : ''}{abilityModifiers[index]})
+            </div>
+          </div>
+        ))}
       </div>
+      
       <div className="formInfoFourCon">
         <div className="infoForm4"><strong>Saving Throws</strong> {savingThrowsDetails}</div>
         <div className="infoForm4"><strong>Skills</strong> {skillDetails}</div>
@@ -123,6 +157,7 @@ const FormOutput = ({ theMon }: { theMon: Details | null }) => {
       {theMon?.legendary_actions && (
         <>
           <h2 className="formInfoMapTitle">Legendary Actions</h2>
+          <div className="formInfoMapDesc">{theMon?.legendary_desc}</div>
           {theMon?.legendary_actions?.map((legendary, i) => {
             return(
               <div className="formInfoMapCon" key={i}>

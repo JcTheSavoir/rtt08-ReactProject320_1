@@ -203,6 +203,12 @@ body{
   justify-content: space-around;
 }
 
+/* ----------------------------{FormOutput}----------------- */
 .infoFormMapSpan{
   white-space: pre-line;
+}
+
+.formInfoThreeCon {
+  display: flex;
+  justify-content: space-around;
 }
