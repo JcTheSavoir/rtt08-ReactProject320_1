@@ -3,7 +3,7 @@ import { Details } from "../interfaces/searchMonstersInter";
 const FormOutput = ({ theMon }: { theMon: Details | null }) => {
 
   //For the non-array objects inside of the monsters details {namely Speed and Skills}
-  const getObjDetails = (obj: { [key: string]: number | boolean | undefined } | undefined, type: 'speed' | 'skills'): string => {
+  const getObjDetails = (obj: { [key: string]: number | boolean | undefined | null } | undefined, type: 'speed' | 'skills' | 'savingThrows'): string => {
     if (!obj) { // Check if the object is undefined and handle it
       return 'N/A';
     }
@@ -11,23 +11,41 @@ const FormOutput = ({ theMon }: { theMon: Details | null }) => {
     for (const [key, value] of Object.entries(obj || {})) { 
       if (value === undefined) {
         // This will skip over any attributes that aren't in the data provided
-      } else if (key === 'hover' && value) {
-        // this is special conditioning if the data has the key "hover"
-        objDetails.push('Hover');
-      } else {
-        // all valid entries are then added
-        if (type === "skills") {
-          objDetails.push(`${key.charAt(0).toUpperCase() + key.slice(1)} +${value}`);
-        } else if (type === 'speed') {
-          objDetails.push(`${key.charAt(0).toUpperCase() + key.slice(1)} ${value} ft.`);
-        }
+        continue;
       }
+      // all valid entries are then added
+      switch (type) {
+        case "skills":
+          objDetails.push(`${key.charAt(0).toUpperCase() + key.slice(1)} +${value}`);
+          break;
+          
+        case "speed":
+          if (key === 'hover' && value) {
+            // this is special conditioning if the data has the key "hover"
+            objDetails.push('Hover');
+          } else {
+            objDetails.push(`${key.charAt(0).toUpperCase() + key.slice(1)} ${value} ft.`);
+          }
+          break;
+
+        case "savingThrows":
+          objDetails.push(`${key.charAt(0).toUpperCase() + key.slice(1, 3)} +${value || "0"}`);
+          break;
+      }  
     }
     return objDetails.length > 0 ? objDetails.join(', ') : 'N/A'; //N/A is incase the object is empty or has no values
-  };
+  }
 
   const speedDetails = getObjDetails(theMon?.speed, "speed");
   const skillDetails = getObjDetails(theMon?.skills, "skills");
+  const savingThrowsDetails = getObjDetails({
+    strength_save: theMon?.strength_save,
+    dexterity_save: theMon?.dexterity_save,
+    constitution_save: theMon?.constitution_save,
+    intelligence_save: theMon?.intelligence_save,
+    wisdom_save: theMon?.wisdom_save,
+    charisma_save: theMon?.charisma_save,
+  }, "savingThrows")
 
   console.log(theMon)
   return (
@@ -45,25 +63,78 @@ const FormOutput = ({ theMon }: { theMon: Details | null }) => {
         <div className="infoForm3"></div>
       </div>
       <div className="formInfoFourCon">
-        <div className="infoForm4"><strong>Saving Throws</strong> </div>
+        <div className="infoForm4"><strong>Saving Throws</strong> {savingThrowsDetails}</div>
         <div className="infoForm4"><strong>Skills</strong> {skillDetails}</div>
-        <div className="infoForm4"><strong>Damage Immunities</strong></div>
-        <div className="infoForm4"><strong>Condition Immunities</strong></div>
-        <div className="infoForm4"><strong>Senses</strong></div>
-        <div className="infoForm4"><strong>Languages</strong></div>
-        <div className="infoForm4"><strong>Challenge</strong></div>
+        <div className="infoForm4"><strong>Damage Vulnerabilities </strong>{theMon?.damage_vulnerabilities || "N/A"}</div>
+        <div className="infoForm4"><strong>Damage Resistances </strong>{theMon?.damage_resistances || "N/A"}</div>
+        <div className="infoForm4"><strong>Damage Immunities</strong> {theMon?.damage_immunities || "N/A"}</div>
+        <div className="infoForm4"><strong>Condition Immunities</strong> {theMon?.condition_immunities || "N/A"}</div>
+        <div className="infoForm4"><strong>Senses</strong> {theMon?.senses || "N/A"}</div>
+        <div className="infoForm4"><strong>Languages</strong> {theMon?.languages || "N/A"}</div>
+        <div className="infoForm4"><strong>Challenge</strong> {theMon?.challenge_rating || "N/A"} ({theMon?.cr.toLocaleString()} XP)</div>
       </div>
       <div className="formInfoFourCon">
 
       </div>
-      {theMon?.special_abilities?.map((special) => {
-        return(
-          <div className="formInfoMap1Con">
-            <div className="infoFormMap1"><strong><em>{special.name}.</em></strong> {special.desc}</div>
-          </div>
-        )
-      })}     
-
+      {theMon?.special_abilities && (
+        <>
+          {theMon?.special_abilities?.map((special, i) => {
+            return(
+              <div className="formInfoMapCon" key={i}>
+                <div className="infoFormMap">
+                  <strong><em>{special.name}.</em></strong>
+                  <span className="infoFormMapSpan"> {special.desc}</span> 
+                </div>
+              </div>
+            )
+          })}
+        </>
+      )}
+      {theMon?.actions && (
+        <>
+          <h2 className="formInfoMapTitle">Actions</h2>
+          {theMon?.actions?.map((action, i) => {
+            return(
+              <div className="formInfoMapCon" key={i}>
+                <div className="infoFormMap">
+                  <strong><em>{action.name}.</em></strong>
+                  <span className="infoFormMapSpan"> {action.desc}</span> 
+                </div>
+              </div>
+            )
+          })}
+        </>
+      )}
+      {theMon?.reactions && (
+        <>
+          <h2 className="formInfoMapTitle">Reactions</h2>
+          {theMon?.reactions?.map((reaction, i) => {
+            return(
+              <div className="formInfoMapCon" key={i}>
+                <div className="infoFormMap">
+                  <strong><em>{reaction.name}.</em></strong>
+                  <span className="infoFormMapSpan"> {reaction.desc}</span> 
+                </div>
+              </div>
+            )
+          })}
+        </>
+      )}
+      {theMon?.legendary_actions && (
+        <>
+          <h2 className="formInfoMapTitle">Legendary Actions</h2>
+          {theMon?.legendary_actions?.map((legendary, i) => {
+            return(
+              <div className="formInfoMapCon" key={i}>
+                <div className="infoFormMap">
+                  <strong><em>{legendary.name}.</em></strong>
+                  <span className="infoFormMapSpan"> {legendary.desc}</span> 
+                </div>
+              </div>
+            )
+          })}
+        </>
+      )}
     </div>
   )
 }

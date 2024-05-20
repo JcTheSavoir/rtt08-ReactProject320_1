@@ -202,3 +202,7 @@ body{
   align-items: center;
   justify-content: space-around;
 }
+
+.infoFormMapSpan{
+  white-space: pre-line;
+}
