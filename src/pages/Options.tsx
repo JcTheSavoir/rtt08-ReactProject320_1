@@ -15,7 +15,7 @@ const Options = () => {
             const { name, symbol } = picked;          
             return (
                 <li className="optionListitem1">
-                    <Link to={`/${symbol.toLowerCase()}/${name.toLowerCase()}`} key={i}>
+                    <Link to={`/rtt08-ReactProject320_1/${symbol.toLowerCase()}/${name.toLowerCase()}`} key={i}>
                       <span className="optionLink1">{name} {symbol}</span>
                     </Link>
                 </li>

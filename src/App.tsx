@@ -1,7 +1,7 @@
 import './style.css'
 
 // import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import Options from './pages/Options';
 import SearchMonster from './pages/SearchMonster'
@@ -15,14 +15,8 @@ function App() {
   return (
     <div className="App">
       <NavBar/>
-      <Routes>
-        <Route path='/' element={<Options/>}/>
-        <Route path='/options' element={<Options/>}/>
-        <Route path='/:symbol/search' element={<SearchMonster/>}/>
-        <Route path='/:symbol/all' element={<AllSpells/>}/>
-        <Route path='/spells/:symbol' element={<EachSpell/>}/>
-        <Route path='/homepage' element={<Homepage/>}/> {/* Work In progress */}
-      </Routes>
+      <Outlet />
+
     </div>
   )
 }
