@@ -48,7 +48,7 @@ const SearchMonster = () => {
     const allMonsterNames = monsters?.results.map((monster) =>
       namesArray.push(monster.name)
     )
-
+    console.log(allMonsterNames)
     const filterMonsters = monsters?.results.filter(
       monster => monster.name.toLowerCase().includes(searchInput.toLowerCase())
     ).slice(0, 10) || [];

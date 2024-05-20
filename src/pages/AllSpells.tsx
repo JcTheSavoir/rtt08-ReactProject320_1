@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom"
 import { Link } from "react-router-dom";
-import { IAllSpells, IPicked } from "../interfaces/allSpellsInter";
+import { IPicked } from "../interfaces/allSpellsInter";
 
 
 const AllSpells = () => {
