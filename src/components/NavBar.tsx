@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
     return (
         <div className="navbarContainer">
           <Link to="/">
-            <div>Homepage</div>
+            <div>Options</div>
           </Link>
             <div className="navbarTitle">Welcome to the DND Information Page</div>
           <Link to="/options">

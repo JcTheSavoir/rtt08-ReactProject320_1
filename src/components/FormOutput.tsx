@@ -73,104 +73,108 @@ const FormOutput = ({ theMon }: { theMon: Details | null }) => {
 
   console.log(theMon)
   return (
-    <div className="formOutputContainer">
-      <div className="formInfoOneCon">
-        <div className="infoForm1Title">{theMon?.name}</div>
-        <div className="infoForm1Details">{theMon?.size} {theMon?.type}, {theMon?.alignment}</div>
-      </div>
+    <>
 
-      <div className="formInfoTwoCon">
-        <div className="infoForm2"><strong>Armor Class</strong> {theMon?.armor_class} ({theMon?.armor_desc})</div>
-        <div className="infoForm2"><strong>Hit Points</strong> {theMon?.hit_points} ({theMon?.hit_dice})</div>
-        <div className="infoForm2"><strong>Speed</strong> {speedDetails}</div>
-      </div>
-
-      <div className="formInfoThreeCon">
-        {abilityNames.map((name, index) => (
-          <div key={index} className="infoForm3Item">
-            <div className="infoForm3Name">{name}</div>
-            <div className="infoForm3Score">
-              {abilityScores[index]} ({abilityModifiers[index] >= 0 ? '+' : ''}{abilityModifiers[index]})
-            </div>
+      <div className="formOutputContainer">
+        <div className="formOutputLeftSide">
+          <div className="formInfoOneCon">
+            <div className="infoForm1Title">{theMon?.name}</div>
+            <div className="infoForm1Details">{theMon?.size} {theMon?.type}, {theMon?.alignment}</div>
           </div>
-        ))}
+          <div className="formInfoTwoCon">
+            <div className="infoForm2"><strong>Armor Class</strong> {theMon?.armor_class} ({theMon?.armor_desc})</div>
+            <div className="infoForm2"><strong>Hit Points</strong> {theMon?.hit_points} ({theMon?.hit_dice})</div>
+            <div className="infoForm2"><strong>Speed</strong> {speedDetails}</div>
+          </div>
+          <div className="formInfoThreeCon">
+            {abilityNames.map((name, index) => (
+              <div key={index} className="infoForm3Item">
+                <div className="infoForm3Name">{name}</div>
+                <div className="infoForm3Score">
+                  {abilityScores[index]} ({abilityModifiers[index] >= 0 ? '+' : ''}{abilityModifiers[index]})
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="formInfoFourCon">
+            <div className="infoForm4"><strong>Saving Throws</strong> {savingThrowsDetails}</div>
+            <div className="infoForm4"><strong>Skills</strong> {skillDetails}</div>
+            <div className="infoForm4"><strong>Damage Vulnerabilities </strong>{theMon?.damage_vulnerabilities || "N/A"}</div>
+            <div className="infoForm4"><strong>Damage Resistances </strong>{theMon?.damage_resistances || "N/A"}</div>
+            <div className="infoForm4"><strong>Damage Immunities</strong> {theMon?.damage_immunities || "N/A"}</div>
+            <div className="infoForm4"><strong>Condition Immunities</strong> {theMon?.condition_immunities || "N/A"}</div>
+            <div className="infoForm4"><strong>Senses</strong> {theMon?.senses || "N/A"}</div>
+            <div className="infoForm4"><strong>Languages</strong> {theMon?.languages || "N/A"}</div>
+            <div className="infoForm4"><strong>Challenge</strong> {theMon?.challenge_rating || "N/A"} ({theMon?.cr.toLocaleString()} XP)</div>
+          </div>
+          
+          {theMon?.special_abilities && (
+            <>
+              {theMon?.special_abilities?.map((special, i) => {
+                return(
+                  <div className="formInfoMapCon" key={i}>
+                    <div className="infoFormMap">
+                      <strong><em>{special.name}.</em></strong>
+                      <span className="infoFormMapSpan"> {special.desc}</span> 
+                    </div>
+                  </div>
+                )
+              })}
+            </>
+          )}
+        </div>
+        <div className="formOutputRightSide">
+          {theMon?.actions && (
+            <>
+              <h2 className="formInfoMapTitle">Actions</h2>
+              {theMon?.actions?.map((action, i) => {
+                return(
+                  <div className="formInfoMapCon" key={i}>
+                    <div className="infoFormMap">
+                      <strong><em>{action.name}.</em></strong>
+                      <span className="infoFormMapSpan"> {action.desc}</span> 
+                    </div>
+                  </div>
+                )
+              })}
+            </>
+          )}
+          {theMon?.reactions && (
+            <>
+              <h2 className="formInfoMapTitle">Reactions</h2>
+              {theMon?.reactions?.map((reaction, i) => {
+                return(
+                  <div className="formInfoMapCon" key={i}>
+                    <div className="infoFormMap">
+                      <strong><em>{reaction.name}.</em></strong>
+                      <span className="infoFormMapSpan"> {reaction.desc}</span> 
+                    </div>
+                  </div>
+                )
+              })}
+            </>
+          )}
+          {theMon?.legendary_actions && (
+            <>
+              <h2 className="formInfoMapTitle">Legendary Actions</h2>
+              <div className="formInfoMapDesc">{theMon?.legendary_desc}</div>
+              {theMon?.legendary_actions?.map((legendary, i) => {
+                return(
+                  <div className="formInfoMapCon" key={i}>
+                    <div className="infoFormMap">
+                      <strong><em>{legendary.name}.</em></strong>
+                      <span className="infoFormMapSpan"> {legendary.desc}</span> 
+                    </div>
+                  </div>
+                )
+              })}
+            </>
+          )}
+        </div>
       </div>
-      
-      <div className="formInfoFourCon">
-        <div className="infoForm4"><strong>Saving Throws</strong> {savingThrowsDetails}</div>
-        <div className="infoForm4"><strong>Skills</strong> {skillDetails}</div>
-        <div className="infoForm4"><strong>Damage Vulnerabilities </strong>{theMon?.damage_vulnerabilities || "N/A"}</div>
-        <div className="infoForm4"><strong>Damage Resistances </strong>{theMon?.damage_resistances || "N/A"}</div>
-        <div className="infoForm4"><strong>Damage Immunities</strong> {theMon?.damage_immunities || "N/A"}</div>
-        <div className="infoForm4"><strong>Condition Immunities</strong> {theMon?.condition_immunities || "N/A"}</div>
-        <div className="infoForm4"><strong>Senses</strong> {theMon?.senses || "N/A"}</div>
-        <div className="infoForm4"><strong>Languages</strong> {theMon?.languages || "N/A"}</div>
-        <div className="infoForm4"><strong>Challenge</strong> {theMon?.challenge_rating || "N/A"} ({theMon?.cr.toLocaleString()} XP)</div>
-      </div>
-      <div className="formInfoFourCon">
 
-      </div>
-      {theMon?.special_abilities && (
-        <>
-          {theMon?.special_abilities?.map((special, i) => {
-            return(
-              <div className="formInfoMapCon" key={i}>
-                <div className="infoFormMap">
-                  <strong><em>{special.name}.</em></strong>
-                  <span className="infoFormMapSpan"> {special.desc}</span> 
-                </div>
-              </div>
-            )
-          })}
-        </>
-      )}
-      {theMon?.actions && (
-        <>
-          <h2 className="formInfoMapTitle">Actions</h2>
-          {theMon?.actions?.map((action, i) => {
-            return(
-              <div className="formInfoMapCon" key={i}>
-                <div className="infoFormMap">
-                  <strong><em>{action.name}.</em></strong>
-                  <span className="infoFormMapSpan"> {action.desc}</span> 
-                </div>
-              </div>
-            )
-          })}
-        </>
-      )}
-      {theMon?.reactions && (
-        <>
-          <h2 className="formInfoMapTitle">Reactions</h2>
-          {theMon?.reactions?.map((reaction, i) => {
-            return(
-              <div className="formInfoMapCon" key={i}>
-                <div className="infoFormMap">
-                  <strong><em>{reaction.name}.</em></strong>
-                  <span className="infoFormMapSpan"> {reaction.desc}</span> 
-                </div>
-              </div>
-            )
-          })}
-        </>
-      )}
-      {theMon?.legendary_actions && (
-        <>
-          <h2 className="formInfoMapTitle">Legendary Actions</h2>
-          <div className="formInfoMapDesc">{theMon?.legendary_desc}</div>
-          {theMon?.legendary_actions?.map((legendary, i) => {
-            return(
-              <div className="formInfoMapCon" key={i}>
-                <div className="infoFormMap">
-                  <strong><em>{legendary.name}.</em></strong>
-                  <span className="infoFormMapSpan"> {legendary.desc}</span> 
-                </div>
-              </div>
-            )
-          })}
-        </>
-      )}
-    </div>
+    </>
   )
 }
 export default FormOutput

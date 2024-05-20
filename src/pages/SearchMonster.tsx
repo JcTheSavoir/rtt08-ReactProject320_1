@@ -68,25 +68,29 @@ const SearchMonster = () => {
     const searchedMonster = getSearch()
 
     return (
-      <div className="apiContainer">
-        <form onSubmit={submitForm} className="apiFormContainer">
-          <label htmlFor="searchName">Enter a Monsters Name: </label>
-          <input list="monsterNames" name="searchName" ref={inputReference} value={searchInput} onChange={inputChange}/>
-          <datalist id="monsterNames">
-            {filterMonsters?.map((monster) => {
-              return(
-              <option key={monster.slug} value={monster.name}></option>
-            )})}
-          </datalist>
-          <button onClick={getSearch} className="apiFormButton">Submit</button>
-        </form>
+      <>
+        <div className="apiContainer">
+          <form onSubmit={submitForm} className="apiFormContainer">
+            <label htmlFor="searchName">Enter a Monsters Name: </label>
+            <input list="monsterNames" name="searchName" ref={inputReference} value={searchInput} onChange={inputChange}/>
+            <datalist id="monsterNames">
+              {filterMonsters?.map((monster) => {
+                return(
+                <option key={monster.slug} value={monster.name}></option>
+              )})}
+            </datalist>
+            <button onClick={getSearch} className="apiFormButton">Submit</button>
+          </form>
+        </div>
           {searchedMonster ? (
-              <FormOutput theMon={searchedMonster} />
+              <div className="parentFormContainer">
+                <FormOutput theMon={searchedMonster} />
+              </div>
             ) : (
-              <h2>No monster found by that name, try searching again.  You can try "Zombie" as a known working option</h2>
+              <h2>No monster found by that name, try searching again.  You can try "Androsphinx" as a known working option</h2>
             )
           }
-      </div>
+      </>
     )
   }
 
