@@ -45,7 +45,7 @@ const AllSpells = () => {
               <div className="infoOne">{spell.name}</div>
               <div className="infoTwoTitle">Level:</div>
               <div className="infoTwo">{spell.level}</div>
-              <Link className="infoDeeper" to={`${spell.url.slice(4)}`}>
+              <Link className="infoDeeper" to={`/rtt08-ReactProject320_1${spell.url.slice(4)}`}>
                 <div>Spell Details</div>
               </Link>
             </div>
